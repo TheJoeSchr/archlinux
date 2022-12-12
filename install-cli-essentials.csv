@@ -1,0 +1,58 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+B,base-devel
+B,git
+B,lib32-gcc-libs
+B,ed
+B,rsync
+B,python
+B,python-pip
+,moreutils,"is a collection of useful unix tools."
+,doas, "privilege escalations"
+,fish
+,tmux
+,fpp, "used by tmux for finding links,files, etc"
+,inetutils, "fish uses 'hostname' in many scripts"
+,neovim-git
+,neovim-remote, "nvr, single instance neovim"
+,direnv, "unclutter .profile, source .envrc for each dir automatically"
+,babashka-bin, "run clojure scritps"
+,ripgrep, "modern cli"
+,nnn, "file explorer"
+,jaapi-advcpmv, "needed for nnn progress bar"
+,bash-completion, "nice"
+,fzy, "fuzzy search"
+,fzf, "fuzzy search"
+,fd, "better find"
+,duf, "better df -h"
+,dust, "better du -cks"
+,exa, "better ls"
+,bat, "better cat"
+,procs, "better ps ax"
+,tldr, "better man"
+,bottom, "better htop"
+,zoxide, "used by fish z"
+,xsel, "needed for neovim"
+,python3
+,python-pip, "package management" 
+,python-poetry, "package management" 
+,github-cli
+,nordvpn-bin
+,tailscale, "like zerotier"
+,nvimpager-git
+,mosh
+,urlview
+,openssh
+,sshuttle
+,googler-git
+,flatpak, "used mainly for desktop apps"
+,xdg-desktop-portal, "for flatpak apps interaction with desktops"
+,xdg-desktop-portal-kde
+,appimagelauncher-git
+,kwin-bismuth
+,noto-fonts 
+,syncthing
+,c++utilities, "syncthingtray dependency"
+,qtutilities, "syncthingtray dependency"
+,qtforkawesome, "syncthingtray dependency"
+,syncthingtray
+,cpu-x, "like cpu-z"
