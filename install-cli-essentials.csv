@@ -56,3 +56,10 @@ B,python-pip
 ,qtforkawesome, "syncthingtray dependency"
 ,syncthingtray
 ,cpu-x, "like cpu-z"
+,clojure
+,rlwrap, "clj"
+,ttf-hack-nerd
+,fzf
+,nodejs
+,npm
+,nvm
