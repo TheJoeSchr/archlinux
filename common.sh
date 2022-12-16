@@ -42,6 +42,29 @@ aurgitmake_install() {
   popd
 }
 
+
+
+export_csv() {
+  progsfile=$1
+  tmpfile="/tmp/$(basename $progsfile).tmp"
+
+  ls -al
+  cat $progsfile
+  [ -f "$progsfile" ] && cat "$progsfile" | sed '/^#/d' >$tmpfile
+  # || curl -Ls "$progsfile" | sed '/^#/d' >$tmpfile
+
+  total=$(wc -l <$tmpfile)
+  echo "Install #$total in total"
+  while IFS=, read -r tag program comment; do
+    n=$((n + 1))
+    echo "$comment" | grep -q "^\".*\"$" &&
+      comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
+    case "$tag" in
+    "B") distrobox-export --bin $(which $program)  --export-path ~/.local/bin ;;
+    esac
+  done <$tmpfile
+}
+
 install_csv() {
   cliapps=$1
   progsfile=$cliapps
