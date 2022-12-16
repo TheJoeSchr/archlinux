@@ -1,7 +1,8 @@
 #! /usr/bin/env bash
 
 # MEANT TO BE RUN AS ROOT
-echo "NOW RUNNING: $0"
+echo "NOW RUNNING: $0 AS $USER"
+echo "NEEDS TO BE RUN AS ROOT"
 
 # TWEAKS
 # Make pacman colorful, concurrent downloads and Pacman eye-candy.
