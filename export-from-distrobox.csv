@@ -10,7 +10,7 @@ B,direnv, "unclutter .profile, source .envrc for each dir automatically"
 B,bb, "babashka-bin, run clojure scritps"
 B,rg, "ripgrep, modern ci"
 B,nnn, "file explorer"
-B,cpv,jaapi-advcpmv, "needed for nnn progress bar"
+B,cpg,jaapi-advcpmv, "needed for nnn progress bar"
 B,mvg,jaapi-advcpmv, "needed for nnn progress bar"
 B,fzy, "fuzzy search"
 B,fzf, "fuzzy search"
@@ -45,4 +45,3 @@ B,rlwrap, "for clj"
 F,ttf-hack-nerd
 B,node, nodejs
 B,npm
-B,nvm
