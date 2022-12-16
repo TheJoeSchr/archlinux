@@ -1,10 +1,11 @@
 #! env bash
 
 # check if unique before installing new
-# for not_unique in $(cut -d, -f2 $cliapps | grep $tobeinstalled) ; do echo $not_unique ; done
+# for not_unique in $(cut -d, -f2 $progsfile | grep $tobeinstalled) ; do echo $not_unique ; done
 
 name=makepkg
 repodir="$HOME/.local/sources"
+mkdir -p $repodir
 # use to share common functions between scripts
 install() {
   printf "Installing the package \`$1\` ($n of $total) $2\n"
@@ -13,7 +14,7 @@ install() {
 
 pip_install() {
   printf "Installing the Python package \`$1\` ($n of $total). $2\n"
-  [ -x "$(command -v "pip")" ] || installpkg python-pip #>/dev/null 2>>/dev/null 2>&11
+  [ -x "$(command -v "pip")" ] || install python-pip #>/dev/null 2>>/dev/null 2>&11
   yes | pip install "$1"
 }
 
@@ -66,8 +67,7 @@ export_csv() {
 }
 
 install_csv() {
-  cliapps=$1
-  progsfile=$cliapps
+  progsfile=$1
   tmpfile="/tmp/$(basename $progsfile).tmp"
 
   ls -al

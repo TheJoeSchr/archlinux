@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+echo "NOW RUNNING: $0 AS $USER"
 source ./common.sh
 # if [ -x $(command -v "yay") ]
 # then
@@ -14,7 +14,7 @@ source ./common.sh
 # PIKAUR
 if [ -x $(command -v "pikaur") ]
 then
-  printf "\nmanually install pikaur" 
+  printf "\nmanually install pikaur\n" 
       # install 
       aurgitmake_install pikaur
 fi

@@ -60,7 +60,6 @@ B,python-pip
 ,clojure
 ,rlwrap, "clj"
 ,ttf-hack-nerd
-,fzf
 ,nodejs
 ,npm
 ,nvm
