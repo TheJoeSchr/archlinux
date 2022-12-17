@@ -20,11 +20,12 @@ then
 fi
 
 # rank mirror because pacman-key is slow
-if [ -x $(command -v "rankmirrors")]
+if [ -x $(command -v "rankmirrors") ]
 then
   printf "\nInstall rankmirrors:\n"
-  pikaur -S --noconfirm pacman-contrib >/dev/null 2>&1
-  pikaur -S --noconfirm --needed rankmirrors-systemd >/dev/null 2>&1
-  rankmirrors /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist
+  install pacman-contrib # >/dev/null 2>&1
+  install rankmirrors-systemd # >/dev/null 2>&1
+  # task todo seems to not get appended
+  rankmirrors /etc/pacman.d/mirrorlist | sudo tee -a /etc/pacman.d/mirrorlist
 fi
 
