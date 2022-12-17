@@ -14,9 +14,11 @@ IMGID=$(sudo buildah commit --rm --tls-verify=false $CLI $FINALIMAGE docker://$U
 echo
 echo "Copy image to user for distrobox:"
 sudo podman image scp -q root@localhost::"$FINALIMAGE" "$USER@localhost::$FINALIMAGE"
+
 echo
 echo "Publish"
-sudo buildah push $IMGID ghcr.io/thejoeschr/archlinux
+# push with non-root user because it's probably logged in
+podman push $IMGID ghcr.io/thejoeschr/archlinux
 # returns with keeping $BASE and other envvar
 # so can manually test further with "buildah"
 echo "Open $SHELL [with User: $LOCALUSER]"
