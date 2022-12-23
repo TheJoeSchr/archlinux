@@ -1,19 +1,13 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-B,git
-B,rsync
-B,tmux
 B,fpp, "used by tmux for finding links,files, etc"
 B,nvim
 B,nvr, neovim-remote
 B,cmake, "needed for telescope-fzf"
-B,direnv, "unclutter .profile, source .envrc for each dir automatically"
 B,bb, "babashka-bin, run clojure scritps"
-B,rg, "ripgrep, modern ci"
 B,nnn, "file explorer"
 B,cpg,jaapi-advcpmv, "needed for nnn progress bar"
 B,mvg,jaapi-advcpmv, "needed for nnn progress bar"
 B,fzy, "fuzzy search"
-B,fzf, "fuzzy search"
 B,fd, "better find"
 B,duf, "better df -h"
 B,dust, "better du -cks"
@@ -22,8 +16,6 @@ B,bat, "better cat"
 B,procs, "better ps ax"
 B,tldr, "better man"
 B,btm, "bottom, better htop"
-B,zoxide, "used by fish z"
-B,xsel, "needed for neovim"
 B,python, python3
 B,pip,python-pip, "package management" 
 B,poetry, python-poetry, "package management" 
@@ -43,5 +35,5 @@ B,clojure
 B,clj
 B,rlwrap, "for clj"
 F,ttf-hack-nerd
-B,node, nodejs
+B,node, "bin for nodejs"
 B,npm

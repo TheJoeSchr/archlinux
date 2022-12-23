@@ -2,5 +2,8 @@
 ,xsel
 ,direnv
 ,fzf
+,rg
+,exa
+,zoxide
 ,neovim-git 
 ,kwin-bismuth-bin
