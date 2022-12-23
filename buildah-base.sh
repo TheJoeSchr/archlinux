@@ -52,6 +52,5 @@ export BASE=$BASE
 export BASEMOUNT=$BASEMOUNT
 EOF
 cat $ENVFILE
-echo "Saved envvars into $ENVFILE"
 # for switching from root to specific user
 # exec su "$1" -s /bin/fish
