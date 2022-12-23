@@ -32,9 +32,14 @@ echo "Open $SHELL [with User: $LOCALUSER]"
 echo "   distrobox create --image $FINALIMAGE -n main"
 echo "   distrobox enter main"
 
-export "FINALIMAGE=$FINALIMAGE"
-export "IMGID=$IMGID"
-echo "IMGID=$IMGID"
-echo "FINALIMAGE=$FINALIMAGE"
-echo "are exported"
-exec env fish
+ENVFILE="$(basename -s .sh $0).env"
+cat <<EOF >$ENVFILE
+export BASE=$BASE
+export CLI=$CLI
+export IMGID=$IMGID
+export FINALIMAGE=$FINALIMAGE
+EOF
+
+echo "source $ENVFILE"
+echo "for:"
+cat $ENVFILE

@@ -49,8 +49,5 @@ export CLI=$CLI
 export CLIMOUNT=$CLIMOUNT
 EOF
 cat $ENVFILE
-echo "Saved envvars into $ENVFILE"
-
-
-# for switchting from root to specific user
+# for switching from root to specific user
 # exec su "$1" -s /bin/fish
