@@ -9,19 +9,32 @@ sudo buildah commit $BASE  "archlinux:base-devel-init"
 sudo bash ./buildah-cli.sh "archlinux:base-devel-init"
 source ./buildah-cli.env
 FINALIMAGE="archlinux:base-devel-init-cli"
-IMGID=$(sudo buildah commit --rm --tls-verify=false $CLI $FINALIMAGE docker://$USER@localhost/$FINALIMAGE) # remove intermediate container
+# remove intermediate container
+IMGID=$(sudo buildah commit $CLI $FINALIMAGE)
 
 echo
-echo "Copy image to user for distrobox:"
-sudo podman image scp -q root@localhost::"$FINALIMAGE" "$USER@localhost::$FINALIMAGE"
+echo "Login"
+source .envrc
+sudo podman login ghcr.io --username=$USERNAME --password=$CR_PAT
 
 echo
-echo "Publish"
-# push with non-root user because it's probably logged in
-podman push $IMGID ghcr.io/thejoeschr/archlinux
+echo "Publish:"
+echo 'podman push $IMGID ghcr.io/thejoeschr/archlinux'
+# push with -root user
+sudo podman push $IMGID ghcr.io/thejoeschr/archlinux
 # returns with keeping $BASE and other envvar
 # so can manually test further with "buildah"
+echo
+echo "Copy image to user for distrobox use:"
+echo 'sudo podman image scp -q root@localhost::"$FINALIMAGE" "$USER@localhost::$FINALIMAGE"'
+
 echo "Open $SHELL [with User: $LOCALUSER]"
 echo "   distrobox create --image $FINALIMAGE -n main"
 echo "   distrobox enter main"
+
+export "FINALIMAGE=$FINALIMAGE"
+export "IMGID=$IMGID"
+echo "IMGID=$IMGID"
+echo "FINALIMAGE=$FINALIMAGE"
+echo "are exported"
 exec env fish
