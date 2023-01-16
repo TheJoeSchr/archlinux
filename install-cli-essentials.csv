@@ -14,6 +14,7 @@ B,python-pip
 ,inetutils, "fish uses 'hostname' in many scripts"
 ,neovim-git
 ,neovim-remote, "nvr, single instance neovim"
+,nvim-packer-git, "plugin manager"
 ,cmake, "needed for telescope-fzf"
 ,direnv, "unclutter .profile, source .envrc for each dir automatically"
 ,babashka-bin, "run clojure scritps"
