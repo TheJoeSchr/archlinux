@@ -5,5 +5,12 @@
 ,rg
 ,exa
 ,zoxide
-,neovim-git 
+,neovim-git, because of CTRL-Z
+,nodejs
+,python-neovim
+,alacritty
+,nvimpager
 ,kwin-bismuth-bin
+,google-chrome
+,zsa-wally-cli
+,ttf-sourcecodepro-nerd

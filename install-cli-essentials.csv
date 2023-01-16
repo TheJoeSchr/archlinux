@@ -1,5 +1,5 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-B,base-devel
+B,base-devel --overwrite /etc/ld.so.conf.d/fakeroot.conf
 B,git
 B,lib32-gcc-libs
 B,ed
@@ -65,3 +65,4 @@ B,python-pip
 ,npm
 ,nvm
 ,etckeeper
+,unzip
