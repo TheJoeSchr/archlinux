@@ -16,8 +16,6 @@ B,bat, "better cat"
 B,procs, "better ps ax"
 B,tldr, "better man"
 B,btm, "bottom, better htop"
-B,python, python3
-B,pip,python-pip, "package management" 
 B,poetry, python-poetry, "package management" 
 B,gh,github-cli
 B,nordvpn,nordvpn-bin
