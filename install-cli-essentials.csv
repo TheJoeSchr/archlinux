@@ -14,10 +14,11 @@ B,python-pip
 ,inetutils, "fish uses 'hostname' in many scripts"
 ,neovim-git
 ,neovim-remote, "nvr, single instance neovim"
+P,vmux, "like nvr, but per session"
 ,nvim-packer-git, "plugin manager"
 ,cmake, "needed for telescope-fzf"
 ,direnv, "unclutter .profile, source .envrc for each dir automatically"
-,babashka-bin, "run clojure scritps"
+,babashka-bin, "run clojure scripts"
 ,ripgrep, "modern cli"
 ,nnn, "file explorer"
 ,jaapi-advcpmv, "needed for nnn progress bar"
@@ -60,7 +61,7 @@ B,python-pip
 ,cpu-x, "like cpu-z"
 ,clojure
 ,rlwrap, "clj"
-,ttf-hack-nerd
+A,ttf-hack-nerd
 ,nodejs
 ,npm
 ,nvm
