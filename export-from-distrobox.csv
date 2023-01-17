@@ -1,10 +1,7 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
 B,fpp, "used by tmux for finding links,files, etc"
-B,nvim
-B,nvr, neovim-remote
 B,cmake, "needed for telescope-fzf"
 B,bb, "babashka-bin, run clojure scritps"
-B,nnn, "file explorer"
 B,cpg,jaapi-advcpmv, "needed for nnn progress bar"
 B,mvg,jaapi-advcpmv, "needed for nnn progress bar"
 B,fzy, "fuzzy search"
@@ -25,7 +22,6 @@ B,mosh
 B,urlview
 B,sshuttle
 A,appimagelauncher-git
-K,kwin-bismuth
 F,noto-fonts 
 S,syncthing
 F,syncthingtray
