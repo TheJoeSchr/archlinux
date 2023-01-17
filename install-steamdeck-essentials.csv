@@ -5,7 +5,8 @@
 ,rg
 ,exa
 ,zoxide
-,neovim-git, because of CTRL-Z
+,neovim-git, "because of CTRL-Z"
+,vmux, "nvr + tmux"
 ,nodejs
 ,python-neovim
 ,alacritty
