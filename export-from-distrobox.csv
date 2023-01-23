@@ -2,8 +2,6 @@
 B,fpp, "used by tmux for finding links,files, etc"
 B,cmake, "needed for telescope-fzf"
 B,bb, "babashka-bin, run clojure scritps"
-B,cpg,jaapi-advcpmv, "needed for nnn progress bar"
-B,mvg,jaapi-advcpmv, "needed for nnn progress bar"
 B,fzy, "fuzzy search"
 B,fd, "better find"
 B,duf, "better df -h"
