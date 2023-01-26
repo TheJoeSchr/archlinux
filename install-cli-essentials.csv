@@ -69,3 +69,7 @@ A,ttf-hack-nerd
 ,nvm
 ,etckeeper
 ,unzip
+,figlet, "ascii art"
+,toilet, "ascii art"
+,navi, "cheatsheets"
+,skim, "fuzzy search"
