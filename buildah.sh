@@ -14,7 +14,7 @@ IMGID=$(sudo buildah commit $CLI $FINALIMAGE)
 
 echo
 echo "Login"
-source .envrc
+source /$HOME/.envrc
 sudo podman login ghcr.io --username=$USERNAME --password=$CR_PAT
 
 echo
