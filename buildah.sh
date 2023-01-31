@@ -24,9 +24,6 @@ echo 'podman push $IMGID ghcr.io/thejoeschr/archlinux'
 sudo podman push $IMGID ghcr.io/thejoeschr/archlinux
 # returns with keeping $BASE and other envvar
 # so can manually test further with "buildah"
-echo
-echo "Copy image to user for distrobox use:"
-echo 'sudo podman image scp -q root@localhost::"$FINALIMAGE" "$USER@localhost::$FINALIMAGE"'
 
 echo "Open $SHELL [with User: $LOCALUSER]"
 echo "   distrobox create --image $FINALIMAGE -n main"
@@ -43,3 +40,9 @@ EOF
 echo "source $ENVFILE"
 echo "for:"
 cat $ENVFILE
+
+" do it at end
+echo
+echo "Copy image to user for distrobox use:"
+echo 'sudo podman image scp root@localhost::"$FINALIMAGE" "$USER@localhost::archlinux:base-devel-init-cli"'
+sudo podman image scp root@localhost::"$FINALIMAGE" "$USER@localhost::$FINALIMAGE"
