@@ -26,14 +26,14 @@ pacman-key --populate # >/dev/null 2>&1
 # Manually sync the package database and 
 # upgrade the archlinux-keyring package before system upgrade
 echo "SYNC THE PACKAGE DATABASE"
-# pacman -Sy --noconfirm archlinux-keyring >/dev/null 2>&1 && pacman -Su --noconfirm>/dev/null 2>&1
 # first sync  with new keys
 # -y refresh
 # -u sysupgrade
 # -uu with downgrade allowed
 pacman -Syuu --noconfirm
-# refresh databases and get new keyring
-pacman -Syu --noconfirm archlinux-keyring  
+# just get new keyring
+pacman -Sy --noconfirm archlinux-keyring >/dev/null 2>&1 && pacman -Su --noconfirm>/dev/null 2>&1
+pacman-key --refresh-keys
 
 # UPGRADE THE SYSTEM
 echo "UPGRADE THE SYSTEM"

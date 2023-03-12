@@ -41,7 +41,7 @@ echo "source $ENVFILE"
 echo "for:"
 cat $ENVFILE
 
-" do it at end
+# do it at end
 echo
 echo "Copy image to user for distrobox use:"
 echo 'sudo podman image scp root@localhost::"$FINALIMAGE" "$USER@localhost::archlinux:base-devel-init-cli"'
