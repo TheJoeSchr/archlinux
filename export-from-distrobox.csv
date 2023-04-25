@@ -29,3 +29,4 @@ B,rlwrap, "for clj"
 F,ttf-hack-nerd
 B,node, "bin for nodejs"
 B,npm
+B,rip
