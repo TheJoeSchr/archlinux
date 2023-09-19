@@ -4,7 +4,7 @@
 # buildah unshare "./buildah-base.sh" "docker.io/archlinux/archlinux:base-devel"
 sudo bash ./buildah-base.sh "docker.io/archlinux/archlinux:base-devel"
 source ./buildah-base.env
-sudo buildah commit $BASE  "archlinux:base-devel-init"
+sudo buildah commit $BASE "archlinux:base-devel-init"
 
 sudo bash ./buildah-cli.sh "archlinux:base-devel-init"
 source ./buildah-cli.env
@@ -14,7 +14,7 @@ IMGID=$(sudo buildah commit $CLI $FINALIMAGE)
 
 echo
 echo "Login"
-source /$HOME/.envrc
+source $HOME/.envrc
 sudo podman login ghcr.io --username=$USERNAME --password=$CR_PAT
 
 echo

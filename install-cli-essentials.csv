@@ -44,7 +44,6 @@ P,vmux, "like nvr, but per session"
 ,nordvpn-bin
 ,tailscale, "like zerotier"
 ,nvimpager-git
-,mosh
 ,urlview
 ,openssh
 ,sshuttle
@@ -64,6 +63,7 @@ P,vmux, "like nvr, but per session"
 ,clojure
 ,rlwrap, "clj"
 A,ttf-hack-nerd
+A,ttf-jetbrains-mono-nerd
 ,nodejs
 ,npm
 ,nvm
