@@ -74,3 +74,5 @@ A,ttf-jetbrains-mono-nerd
 ,navi, "cheatsheets"
 ,skim, "fuzzy search"
 ,rm-improved, "better rm with graveyard"
+,1password-cli, "password manager"
+,jq, "json cli for 1password-cli"
