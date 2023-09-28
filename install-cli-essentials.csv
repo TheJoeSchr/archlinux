@@ -76,3 +76,8 @@ A,ttf-jetbrains-mono-nerd
 ,rm-improved, "better rm with graveyard"
 ,1password-cli, "password manager"
 ,jq, "json cli for 1password-cli"
+,yad, "steamtinker tools"
+,xdotools, "steamtinker tools"
+,xorg-xwininfo, "steamtinker tools"
+,xxd, "steamtinker tools"
+,lynx, "cdmg"
