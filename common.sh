@@ -24,7 +24,7 @@ gitmake_install() {
   dir="$repodir/$progname"
   printf "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $2\n"
   git -C "$repodir" clone --depth 1 --single-branch \
-    --no-tags -q "$1" "$dir" 
+    --no-tags -q "https://www.github.com/$1" "$dir" 
   pushd "$dir" || exit 1
   make #>/dev/null 2>>/dev/null 2>&11
   sudo make install #>/dev/null 2>>/dev/null 2>&11

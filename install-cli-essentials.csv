@@ -15,7 +15,7 @@ P,vmux
 ,inetutils, "fish uses 'hostname' in many scripts"
 ,neovim
 ,neovim-remote, "nvr, single instance neovim"
-P,vmux, "like nvr, but per session"
+G,jceb/vmux, "like nvr, but per session"
 ,nvim-packer-git, "plugin manager"
 ,cmake, "needed for telescope-fzf"
 ,direnv, "unclutter .profile, source .envrc for each dir automatically"
