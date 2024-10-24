@@ -1,5 +1,5 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
-B,"base-devel --overwrite /etc/ld.so.conf.d/fakeroot.conf"
+B,base-devel
 B,git
 B,lib32-gcc-libs
 B,ed
