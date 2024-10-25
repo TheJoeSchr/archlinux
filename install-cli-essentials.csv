@@ -57,7 +57,7 @@ G,jceb/vmux, "like nvr, but per session"
 ,c++utilities, "syncthingtray dependency"
 ,qtutilities, "syncthingtray dependency"
 ,qtforkawesome, "syncthingtray dependency"
-,syncthingtray-qt6
+,syncthingtray
 ,cpu-x, "like cpu-z"
 ,clojure
 ,rlwrap, "clj"
@@ -79,3 +79,4 @@ A,ttf-jetbrains-mono-nerd
 ,xorg-xwininfo, "steamtinker tools"
 ,xxd, "steamtinker tools"
 ,lynx, "cdmg"
+,uv, "pip alternative"
