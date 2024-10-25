@@ -10,7 +10,7 @@ B,python-pip
 ,doas, "privilege escalations"
 ,fish
 ,tmux
-P,vmux
+G,jceb/vmux
 ,tmate, "share tmux sesssion via web browser"
 ,fpp, "used by tmux for finding links,files, etc"
 ,inetutils, "fish uses 'hostname' in many scripts"
@@ -23,7 +23,6 @@ G,jceb/vmux, "like nvr, but per session"
 ,babashka-bin, "run clojure scripts"
 ,ripgrep, "modern cli"
 ,nnn, "file explorer"
-,jaapi-advcpmv, "needed for nnn progress bar"
 ,bash-completion, "nice"
 ,fzy, "fuzzy search"
 ,fzf, "fuzzy search"
@@ -58,7 +57,7 @@ G,jceb/vmux, "like nvr, but per session"
 ,c++utilities, "syncthingtray dependency"
 ,qtutilities, "syncthingtray dependency"
 ,qtforkawesome, "syncthingtray dependency"
-,syncthingtray
+,syncthingtray-qt6
 ,cpu-x, "like cpu-z"
 ,clojure
 ,rlwrap, "clj"
@@ -72,7 +71,6 @@ A,ttf-jetbrains-mono-nerd
 ,figlet, "ascii art"
 ,toilet, "ascii art"
 ,navi, "cheatsheets"
-,skim, "fuzzy search"
 ,rm-improved, "better rm with graveyard"
 ,1password-cli, "password manager"
 ,jq, "json cli for 1password-cli"
