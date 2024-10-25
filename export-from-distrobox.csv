@@ -1,23 +1,23 @@
 #TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
 B,fpp, "used by tmux for finding links,files, etc"
 B,cmake, "needed for telescope-fzf"
-B,bb, "babashka-bin, run clojure scritps"
+,bb, "babashka-bin, run clojure scritps"
 B,fzy, "fuzzy search"
-B,fd, "better find"
-B,duf, "better df -h"
-B,dust, "better du -cks"
-B,exa, "better ls"
-B,bat, "better cat"
-B,procs, "better ps ax"
-B,tldr, "better man"
-B,btm, "bottom, better htop"
+,fd, "better find"
+,duf, "better df -h"
+,dust, "better du -cks"
+,exa, "better ls"
+,bat, "better cat"
+,procs, "better ps ax"
+,tldr, "better man"
+,btm, "bottom, better htop"
 B,poetry, python-poetry, "package management" 
-B,gh,github-cli
+,gh,github-cli
 B,nordvpn,nordvpn-bin
 ,tailscale, "like zerotier"
 B,nvimpager,nvimpager-git
 B,mosh
-B,urlview
+,urlview
 B,sshuttle
 A,appimagelauncher-git
 F,noto-fonts 
