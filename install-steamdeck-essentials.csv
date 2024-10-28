@@ -9,9 +9,9 @@
 ,vmux, "nvr + tmux"
 ,nodejs
 ,python-neovim
-,alacritty
+,kitty
+,yazi
 ,nvimpager
-,kwin-bismuth-bin
 ,google-chrome
 ,zsa-wally-cli
 ,ttf-sourcecodepro-nerd
