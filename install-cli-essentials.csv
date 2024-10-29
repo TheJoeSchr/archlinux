@@ -43,7 +43,7 @@ G,jceb/vmux, "like nvr, but per session"
 ,github-cli
 ,nordvpn-bin
 ,tailscale, "like zerotier"
-,nvimpager-git
+,nvimpager
 ,urlview
 ,openssh
 ,sshuttle
