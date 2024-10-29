@@ -38,7 +38,7 @@ G,jceb/vmux, "like nvr, but per session"
 ,zoxide, "used by fish z"
 ,xsel, "needed for neovim"
 ,python3
-,python-pip, "package management" 
+,python-pipx, "global package management" 
 ,python-poetry, "package management" 
 ,github-cli
 ,nordvpn-bin
