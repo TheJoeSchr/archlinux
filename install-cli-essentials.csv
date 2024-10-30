@@ -10,7 +10,6 @@ B,python-pip
 ,doas, "privilege escalations"
 ,fish
 ,tmux
-G,jceb/vmux
 ,tmate, "share tmux sesssion via web browser"
 ,fpp, "used by tmux for finding links,files, etc"
 ,inetutils, "fish uses 'hostname' in many scripts"
