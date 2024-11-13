@@ -5,12 +5,11 @@
 ,rg
 ,exa
 ,zoxide
-,neovim-git, "because of CTRL-Z"
 ,vmux, "nvr + tmux"
 ,nodejs
 ,python-neovim
 ,kitty
-,yazi
+,yazi-nightly-bin
 ,nvimpager
 ,neovim-nightly-bin, "because of old nvim"
 ,google-chrome
