@@ -16,7 +16,6 @@ B,python-pip
 ,neovim
 ,neovim-remote, "nvr, single instance neovim"
 G,jceb/vmux, "like nvr, but per session"
-,nvim-packer-git, "plugin manager"
 ,cmake, "needed for telescope-fzf"
 ,direnv, "unclutter .profile, source .envrc for each dir automatically"
 ,babashka-bin, "run clojure scripts"
