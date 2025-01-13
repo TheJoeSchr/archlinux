@@ -8,7 +8,7 @@ B,python
 B,python-pip
 ,moreutils,"is a collection of useful unix tools."
 ,doas, "privilege escalations"
-,fish
+,fish-git
 ,tmux
 ,tmate, "share tmux sesssion via web browser"
 ,fpp, "used by tmux for finding links,files, etc"
@@ -81,8 +81,8 @@ A,ttf-jetbrains-mono-nerd
 ,aerc, "alternative tui email"
 ,w3m, "for aerc"
 ,dante, "for aerc"
-,yazi, "faster lf"
-,rustup, "for yazi"
+,yazi-nightly-bin, "faster lf"
+,rustup, "for yazi & fish"
 ,imagemagick, "for yazi"
 ,chafa, "for yazi"
 ,ffmpegthumbnailer, "for yazi"
