@@ -79,6 +79,7 @@ A,ttf-jetbrains-mono-nerd
 ,lynx, "cdmg"
 ,uv, "pip alternative"
 ,aerc, "alternative tui email"
+,catimg, "for aerc"
 ,w3m, "for aerc"
 ,dante, "for aerc"
 ,yazi-nightly-bin, "faster lf"
