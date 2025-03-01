@@ -83,7 +83,7 @@ A,ttf-jetbrains-mono-nerd
 ,catimg, "for aerc"
 ,w3m, "for aerc"
 ,dante, "for aerc"
-,yazi-nightly-bin, "faster lf"
+,yazi-git, "faster lf"
 ,rustup, "for yazi & fish"
 ,imagemagick, "for yazi"
 ,chafa, "for yazi"
