@@ -23,4 +23,5 @@ G,jceb/vmux, "like nvr, but per session"
 ,xorg-xwininfo, "steamtinker tools"
 ,xxd, "steamtinker tools"
 ,zerotier-one, "home vpn"
-,nordvpn, "private vpn"
+,insync
+
