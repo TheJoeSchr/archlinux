@@ -1,4 +1,6 @@
 ,tmux
+,ncurses, "for urlview"
+,urlview, "for tmux-urlview"
 ,xsel
 ,direnv
 ,fzf
