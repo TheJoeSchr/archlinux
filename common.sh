@@ -24,9 +24,9 @@ gitmake_install() {
   dir="$repodir/$progname"
   printf "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $2\n"
   git -C "$repodir" clone --depth 1 --single-branch \
-    --no-tags -q "https://www.github.com/$1" "$dir" 
+    --no-tags -q "https://www.github.com/$1" "$dir"
   pushd "$dir" || exit 1
-  make #>/dev/null 2>>/dev/null 2>&11
+  make              #>/dev/null 2>>/dev/null 2>&11
   sudo make install #>/dev/null 2>>/dev/null 2>&11
   popd
 }
@@ -39,7 +39,7 @@ aurgitmake_install() {
   git -C "$repodir" clone --depth 1 --single-branch \
     --no-tags -q "https://aur.archlinux.org/$1.git" "$dir"
   pushd "$dir" || exit 1
-      makepkg --force --install --syncdeps --noconfirm --clean  #>/dev/null 2>>/dev/null 2>&11
+  makepkg --force --install --syncdeps --noconfirm --clean #>/dev/null 2>>/dev/null 2>&11
   popd
 }
 
@@ -55,6 +55,10 @@ install_csv() {
   echo "Install #$total"
   while IFS=, read -r tag program comment; do
     n=$((n + 1))
+
+    # print timestamp for watch-etc.sh
+    echo -en "$(date '+%Y%m%d%H%M%S')\t"
+
     echo "$comment" | grep -q "^\".*\"$" &&
       comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
     case "$tag" in
@@ -66,7 +70,6 @@ install_csv() {
     esac
   done <$tmpfile
 }
-
 
 export_csv() {
   progsfile=$1
@@ -84,8 +87,7 @@ export_csv() {
     echo "$comment" | grep -q "^\".*\"$" &&
       comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
     case "$tag" in
-    "B") distrobox-export --bin $(which $program)  --export-path ~/.local/bin ;;
+    "B") distrobox-export --bin $(which $program) --export-path ~/.local/bin ;;
     esac
   done <$tmpfile
 }
-
