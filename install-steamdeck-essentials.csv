@@ -7,6 +7,8 @@
 ,ripgrep
 ,exa
 ,zoxide
+,git-delta
+,difftastic
 G,jceb/vmux, "like nvr, but per session"
 ,nodejs
 ,npm
