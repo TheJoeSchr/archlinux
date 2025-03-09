@@ -1,0 +1,30 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+,doas, "privilege escalations"
+,tmate, "share tmux sesssion via web browser"
+,unzip
+,navi, "cheatsheets"
+,fpp, "used by tmux for finding links,files, etc"
+,python-poetry, "package management" 
+,ghostty-git, "better konsole"
+,github-cli
+,glab-git, "gitlab cli"
+,fzy, "fuzzy search"
+,cmake, "needed for telescope-fzf"
+,bash-completion, "nice"
+,googler-git
+,flatpak, "used mainly for desktop apps"
+,xdg-desktop-portal, "for flatpak apps interaction with desktops"
+,xdg-desktop-portal-kde
+,appimagelauncher-git
+,noto-fonts 
+,openssh
+,c++utilities, "syncthingtray dependency"
+,qtutilities, "syncthingtray dependency"
+,qtforkawesome, "syncthingtray dependency"
+,syncthingtray
+,clojure
+,rlwrap, "clj"
+,fzy, "fuzzy search"
+,figlet, "ascii art"
+,toilet, "ascii art"
+A,matterhorn, "mattermost tui client"
