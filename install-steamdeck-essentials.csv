@@ -2,16 +2,19 @@
 ,xsel
 ,direnv
 ,fzf
-,rg
+,ripgrep
 ,exa
 ,zoxide
-,vmux, "nvr + tmux"
+G,jceb/vmux, "like nvr, but per session"
 ,nodejs
+,npm
 ,python-neovim
-,kitty
 ,yazi-nightly-bin
 ,nvimpager
 ,neovim-nightly-bin, "because of old nvim"
-,google-chrome
-,zsa-wally-cli
+,google-chrome-stable
 ,ttf-sourcecodepro-nerd
+,yad, "steamtinker tools"
+,xdotools, "steamtinker tools"
+,xorg-xwininfo, "steamtinker tools"
+,xxd, "steamtinker tools"

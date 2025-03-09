@@ -6,23 +6,20 @@ B,ed
 B,rsync
 B,python
 B,python-pip
-,moreutils,"is a collection of useful unix tools."
-,doas, "privilege escalations"
+B,python-pipx
+B,python3
+B,uv, "pip(x) alternative"
+,inotify-tools,"needed for folder watch"
 ,fish-git
 ,tmux
 ,tmate, "share tmux sesssion via web browser"
-,fpp, "used by tmux for finding links,files, etc"
 ,inetutils, "fish uses 'hostname' in many scripts"
-,neovim
+,neovim-git, "neovim-nightly-bin in steamdeck"
 ,neovim-remote, "nvr, single instance neovim"
 G,jceb/vmux, "like nvr, but per session"
-,cmake, "needed for telescope-fzf"
 ,direnv, "unclutter .profile, source .envrc for each dir automatically"
 ,babashka-bin, "run clojure scripts"
 ,ripgrep, "modern cli"
-,nnn, "file explorer"
-,bash-completion, "nice"
-,fzy, "fuzzy search"
 ,fzf, "fuzzy search"
 ,fd, "better find"
 ,duf, "better df -h"
@@ -36,49 +33,19 @@ G,jceb/vmux, "like nvr, but per session"
 ,bottom, "better htop"
 ,zoxide, "used by fish z"
 ,xsel, "needed for neovim"
-,python3
-,python-pipx, "global package management" 
-,python-poetry, "package management" 
-,github-cli
 ,nordvpn-bin
-,tailscale, "like zerotier"
+,zerotier-one
 ,nvimpager
 ,urlview
-,openssh
 ,sshuttle
-,googler-git
-,flatpak, "used mainly for desktop apps"
-,xdg-desktop-portal, "for flatpak apps interaction with desktops"
-,xdg-desktop-portal-kde
-,appimagelauncher-git
-,noto-fonts 
 ,syncthing
-,c++utilities, "syncthingtray dependency"
-,qtutilities, "syncthingtray dependency"
-,qtforkawesome, "syncthingtray dependency"
-,syncthingtray
-,cpu-x, "like cpu-z"
-,clojure
-,rlwrap, "clj"
-A,ttf-hack-nerd
-A,ttf-jetbrains-mono-nerd
 ,nodejs
 ,npm
 ,nvm
 ,etckeeper
 ,unzip
-,figlet, "ascii art"
-,toilet, "ascii art"
-,navi, "cheatsheets"
-,rm-improved, "better rm with graveyard"
-,1password-cli, "password manager"
+,rm-improved-bin, "better rm with graveyard"
 ,jq, "json cli for 1password-cli"
-,yad, "steamtinker tools"
-,xdotools, "steamtinker tools"
-,xorg-xwininfo, "steamtinker tools"
-,xxd, "steamtinker tools"
-,lynx, "cdmg"
-,uv, "pip alternative"
 ,aerc, "alternative tui email"
 ,catimg, "for aerc"
 ,w3m, "for aerc"
@@ -88,9 +55,6 @@ A,ttf-jetbrains-mono-nerd
 ,imagemagick, "for yazi"
 ,chafa, "for yazi"
 ,ffmpegthumbnailer, "for yazi"
-,p7zip, "for yazi"
+,7zip, "for yazi"
 ,poppler, "for yazi"
 ,dragon-drop, "for yazi"
-,ghostty-git, "better konsole"
-,glab-git, "gitlab cli"
-A,matterhorn, "mattermost tui client"
