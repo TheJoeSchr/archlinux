@@ -28,3 +28,4 @@
 ,figlet, "ascii art"
 ,toilet, "ascii art"
 A,matterhorn, "mattermost tui client"
+,syncthing, "not essential, breaks distrpbox because of SDL"
