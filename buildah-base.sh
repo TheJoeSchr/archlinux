@@ -8,6 +8,7 @@ source ./buildah-common.sh
 
 IMAGE=$1
 export BASE=$(buildah --cgroup-manager=cgroupfs from $IMAGE)
+echo "BASE: $BASE"
 
 echo "INSTALL BABASHKA"
 buildah run $BASE /bin/sh -c "bash < <(curl -s https://raw.githubusercontent.com/babashka/babashka/master/install)"
