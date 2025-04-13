@@ -13,7 +13,12 @@ FINALIMAGE="archlinux:base-devel-init-cli"
 # remove intermediate container
 IMGID=$(sudo buildah commit $CLI $FINALIMAGE)
 
-# check if IMGID is empty and if yes wait for prompt before continuing AI!
+# Check if IMGID is empty
+if [ -z "$IMGID" ]; then
+  echo "Error: Failed to commit container. IMGID is empty. Probaly needs to redo sudo"
+  read -p "Press Enter to continue or Ctrl+C to abort..."
+  IMGID=$(sudo buildah commit $CLI $FINALIMAGE)
+fi
 
 echo
 echo "Login"
