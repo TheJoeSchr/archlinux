@@ -33,6 +33,7 @@ G,jceb/vmux, "like nvr, but per session"
 ,bottom, "better htop"
 ,zoxide, "used by fish z"
 ,xsel, "needed for neovim"
+,wl-clipboard, "xlip for wayland"
 ,nordvpn-bin
 ,zerotier-one
 ,nvimpager
