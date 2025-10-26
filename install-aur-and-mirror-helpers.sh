@@ -114,9 +114,15 @@ main() {
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  if [[ "${1:-}" == "rank_mirrors" ]]; then
+  case "${1:-}" in
+  rank_mirrors)
     rank_mirrors
-  else
+    ;;
+  install_aur_helper)
+    install_aur_helper
+    ;;
+  *)
     main "$@"
-  fi
+    ;;
+  esac
 fi
