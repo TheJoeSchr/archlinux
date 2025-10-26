@@ -114,5 +114,9 @@ main() {
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  main "$@"
+  if [[ "${1:-}" == "rank_mirrors" ]]; then
+    rank_mirrors
+  else
+    main "$@"
+  fi
 fi
