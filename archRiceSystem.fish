@@ -77,6 +77,10 @@ if ask "Init keys ( and full upgrade on NON steamdeck)?"
     end
 end # / full upgrade
 
+if ask "Rank mirrors?"
+    env bash ~/archlinux/install-aur-and-mirror-helpers.sh rank_mirrors
+end
+
 # install AUR helper:
 if not command -sq pikaur
     if ask "Install pikaur"
