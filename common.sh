@@ -155,20 +155,18 @@ install_csv() {
     return 1
   fi
 
-  local tmpfile
-  tmpfile="/tmp/$(basename "$progsfile").tmp"
+  local lines
+  mapfile -t lines < <(sed '/^#/d' "$progsfile")
+  # || curl -Ls "$progsfile" | sed '/^#/d' | mapfile -t lines
 
-  sed '/^#/d' "$progsfile" >"$tmpfile"
-  # || curl -Ls "$progsfile" | sed '/^#/d' >"$tmpfile"
-
-  local total
-  total=$(wc -l <"$tmpfile")
+  local total=${#lines[@]}
   echo "Installing $total programs."
 
   local n=0
   local tag program comment
-  while IFS=, read -r tag program comment; do
+  for line in "${lines[@]}"; do
     n=$((n + 1))
+    IFS=, read -r tag program comment <<<"$line"
 
     # print timestamp for watch-etc.sh
     echo -en "$(date '+%Y%m%d%H%M%S')\t"
@@ -184,7 +182,7 @@ install_csv() {
     "B") echo "$program should already be installed" ;;
     *) install "$program" "$comment" "$n" "$total" ;;
     esac
-  done <$tmpfile
+  done
 }
 
 #######################################
@@ -205,20 +203,18 @@ export_csv() {
     return 1
   fi
 
-  local tmpfile
-  tmpfile="/tmp/$(basename "$progsfile").tmp"
+  local lines
+  mapfile -t lines < <(sed '/^#/d' "$progsfile")
+  # || curl -Ls "$progsfile" | sed '/^#/d' | mapfile -t lines
 
-  sed '/^#/d' "$progsfile" >"$tmpfile"
-  # || curl -Ls "$progsfile" | sed '/^#/d' >"$tmpfile"
-
-  local total
-  total=$(wc -l <"$tmpfile")
+  local total=${#lines[@]}
   echo "Exporting $total programs."
 
   local n=0
   local tag program comment
-  while IFS=, read -r tag program comment; do
+  for line in "${lines[@]}"; do
     n=$((n + 1))
+    IFS=, read -r tag program comment <<<"$line"
 
     if [[ "$comment" =~ ^\".*\"$ ]]; then
       comment="${comment%\"}"
@@ -228,5 +224,5 @@ export_csv() {
     case "$tag" in
     "B") distrobox-export --bin "$(which "$program")" --export-path "$HOME/.local/bin" ;;
     esac
-  done <"$tmpfile"
+  done
 }
