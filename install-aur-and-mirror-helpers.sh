@@ -95,7 +95,7 @@ rank_mirrors() {
   fi
   echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
   sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-  rankmirrors -f 15 /etc/pacman.d/mirrorlist | sudo tee /etc/pacman.d/mirrorlist >/dev/null
+  sudo rankmirrors --fasttrack 15
 }
 
 #######################################
