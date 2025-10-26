@@ -1,40 +1,118 @@
-#! /usr/bin/env bash
-echo "NOW RUNNING: $0 AS $USER"
-source ./common.sh
-if [ -x $(command -v "yay") ]; then
-  printf "\nmanually install yay\n"
-  # manual
-  aurgitmake_install yay-bin
-fi
+#!/usr/bin/env bash
+#
+# Installs an AUR helper (pikaur) and optimizes pacman mirrorlist.
 
-[ $(command -v "yay") ] &&
-  yay --needed --noconfirm -S pikaur-static
+set -euo pipefail
 
-# PIKAUR
-if [ -x $(command -v "pikaur") ]; then
-  printf "\nmanually install pikaur\n"
-  # install
-  aurgitmake_install pikaur
-  if [ -x $(command -v "pikaur") ]; then
-    printf "\try install pikaur-static\n"
-    # install
-    aurgitmake_install pikaur-static
-    if [ -x $(command -v "pikaur") ]; then
-      printf "\paru install pikaur\n"
-      # install
-      sudo pacman -S paru
-      paru -S pikaur-static
-    fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./common.sh
+source "$SCRIPT_DIR/common.sh"
+
+#######################################
+# Installs an AUR helper, preferring pikaur. It tries different methods
+# and helpers (yay, paru) as fallbacks.
+# Globals:
+#   None
+# Arguments:
+#   None
+# Outputs:
+#   Writes installation progress to stdout.
+# Returns:
+#   0 on success, 1 on failure.
+#######################################
+install_aur_helper() {
+  if command -v pikaur &>/dev/null; then
+    echo "pikaur is already installed."
+    return 0
   fi
 
-fi
+  echo "pikaur not found. Attempting to install it..."
 
-# rank mirror because pacman-key is slow
-if [ -x $(command -v "rankmirrors") ]; then
-  printf "\nInstall rankmirrors:\n"
-  install pacman-contrib      # >/dev/null 2>&1
-  install rankmirrors-systemd # >/dev/null 2>&1
-  # task todo seems to not get appended
-  # rankmirrors /etc/pacman.d/mirrorlist | sudo tee -a /etc/pacman.d/mirrorlist
-  rankmirrors -f 15
+  # 1. Try with yay
+  if ! command -v yay &>/dev/null; then
+    echo "yay not found, attempting to install it from AUR..."
+    aurgitmake_install yay-bin "AUR helper"
+  fi
+
+  if command -v yay &>/dev/null; then
+    echo "Using yay to install pikaur-static..."
+    yay --needed --noconfirm -S pikaur-static
+    if command -v pikaur &>/dev/null; then
+      echo "pikaur installed successfully using yay."
+      return 0
+    fi
+    echo "Failed to install pikaur with yay."
+  fi
+
+  # 2. Try with paru
+  if ! command -v paru &>/dev/null; then
+    echo "paru not found, attempting to install it with pacman..."
+    sudo pacman -S --needed --noconfirm paru
+  fi
+
+  if command -v paru &>/dev/null; then
+    echo "Using paru to install pikaur-static..."
+    paru -S --needed --noconfirm pikaur-static
+    if command -v pikaur &>/dev/null; then
+      echo "pikaur installed successfully using paru."
+      return 0
+    fi
+    echo "Failed to install pikaur with paru."
+  fi
+
+  # 3. Direct installation from AUR
+  echo "Trying to install pikaur directly from AUR..."
+  aurgitmake_install pikaur "AUR helper"
+  if command -v pikaur &>/dev/null; then
+    echo "pikaur installed successfully from AUR."
+    return 0
+  fi
+
+  echo "Trying to install pikaur-static directly from AUR..."
+  aurgitmake_install pikaur-static "AUR helper"
+  if command -v pikaur &>/dev/null; then
+    echo "pikaur-static installed successfully from AUR."
+    return 0
+  fi
+
+  echo "ERROR: Could not install pikaur." >&2
+  return 1
+}
+
+#######################################
+# Ranks pacman mirrors to improve download speeds.
+# Globals:
+#   None
+# Arguments:
+#   None
+# Outputs:
+#   Writes progress to stdout.
+#######################################
+rank_mirrors() {
+  if ! command -v rankmirrors &>/dev/null; then
+    echo "rankmirrors not found. Installing pacman-contrib..."
+    sudo pacman -S --needed --noconfirm pacman-contrib
+  fi
+  echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
+  sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+  rankmirrors -f 15 /etc/pacman.d/mirrorlist | sudo tee /etc/pacman.d/mirrorlist >/dev/null
+}
+
+#######################################
+# Main function
+# Globals:
+#   None
+# Arguments:
+#   $@
+# Outputs:
+#   Writes progress to stdout/stderr.
+#######################################
+main() {
+  echo "NOW RUNNING: $0 AS $USER" >&2
+  install_aur_helper
+  rank_mirrors
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
 fi
