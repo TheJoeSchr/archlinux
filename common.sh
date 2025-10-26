@@ -17,45 +17,55 @@ ensure_repodir() {
 #######################################
 # Installs a package using pikaur.
 # Globals:
-#   n       (current package number from install_csv)
-#   total   (total number of packages from install_csv)
+#   None
 # Arguments:
 #   $1: Package name
 #   $2: Comment/description
+#   $3: (Optional) Current package number
+#   $4: (Optional) Total number of packages
 # Outputs:
 #   Writes installation progress to stdout.
 #######################################
 install() {
-  printf "Installing the package \`%s\` (%s of %s) %s\n" "$1" "$n" "$total" "$2"
+  if [[ -n "$3" && -n "$4" ]]; then
+    printf "Installing the package \`%s\` (%s of %s) %s\n" "$1" "$3" "$4" "$2"
+  else
+    printf "Installing the package \`%s\` %s\n" "$1" "$2"
+  fi
   pikaur -S --noconfirm --needed "$1"
 }
 
 #######################################
 # Installs a Python package using pip.
 # Globals:
-#   n       (current package number from install_csv)
-#   total   (total number of packages from install_csv)
+#   None
 # Arguments:
 #   $1: Package name
 #   $2: Comment/description
+#   $3: (Optional) Current package number
+#   $4: (Optional) Total number of packages
 # Outputs:
 #   Writes installation progress to stdout.
 #######################################
 pip_install() {
-  printf "Installing the Python package \`%s\` (%s of %s). %s\n" "$1" "$n" "$total" "$2"
-  [ -x "$(command -v "pip")" ] || install python-pip
+  if [[ -n "$3" && -n "$4" ]]; then
+    printf "Installing the Python package \`%s\` (%s of %s). %s\n" "$1" "$3" "$4" "$2"
+  else
+    printf "Installing the Python package \`%s\`. %s\n" "$1" "$2"
+  fi
+  [ -x "$(command -v "pip")" ] || install python-pip "dependency for pip"
   yes | pip install "$1"
 }
 
 #######################################
 # Clones a git repository and installs using make.
 # Globals:
-#   n        (current package number from install_csv)
-#   total    (total number of packages from install_csv)
 #   REPODIR
 # Arguments:
 #   $1: GitHub repository (user/repo)
 #   $2: Comment/description
+#   $3: (Optional) Current package number
+#   $4: (Optional) Total number of packages
 # Outputs:
 #   Writes installation progress to stdout.
 # Returns:
@@ -70,7 +80,11 @@ gitmake_install() {
   local dir
   dir="$REPODIR/$progname"
 
-  printf "Installing \`%s\` (%s of %s) via \`git\` and \`make\`. %s\n" "$progname" "$n" "$total" "$2"
+  if [[ -n "$3" && -n "$4" ]]; then
+    printf "Installing \`%s\` (%s of %s) via \`git\` and \`make\`. %s\n" "$progname" "$3" "$4" "$2"
+  else
+    printf "Installing \`%s\` via \`git\` and \`make\`. %s\n" "$progname" "$2"
+  fi
   git -C "$REPODIR" clone --depth 1 --single-branch \
     --no-tags -q "https://www.github.com/$1" "$dir"
 
@@ -87,12 +101,12 @@ gitmake_install() {
 #######################################
 # Clones an AUR git repository and installs using makepkg.
 # Globals:
-#   n        (current package number from install_csv)
-#   total    (total number of packages from install_csv)
 #   REPODIR
 # Arguments:
 #   $1: AUR package name
 #   $2: Comment/description
+#   $3: (Optional) Current package number
+#   $4: (Optional) Total number of packages
 # Outputs:
 #   Writes installation progress to stdout.
 # Returns:
@@ -105,7 +119,11 @@ aurgitmake_install() {
   local dir
   dir="$REPODIR/$progname"
 
-  printf "Installing \`%s\` (%s of %s) from AUR. %s\n" "$progname" "$n" "$total" "$2"
+  if [[ -n "$3" && -n "$4" ]]; then
+    printf "Installing \`%s\` (%s of %s) from AUR. %s\n" "$progname" "$3" "$4" "$2"
+  else
+    printf "Installing \`%s\` from AUR. %s\n" "$progname" "$2"
+  fi
   echo "Cloning into $dir"
   git -C "$REPODIR" clone --depth 1 --single-branch \
     --no-tags -q "https://aur.archlinux.org/$1.git" "$dir"
@@ -160,11 +178,11 @@ install_csv() {
       comment="${comment#\"}"
     fi
     case "$tag" in
-    "G") gitmake_install "$program" "$comment" ;;
-    "P") pip_install "$program" "$comment" ;;
-    "A") aurgitmake_install "$program" "$comment" ;;
+    "G") gitmake_install "$program" "$comment" "$n" "$total" ;;
+    "P") pip_install "$program" "$comment" "$n" "$total" ;;
+    "A") aurgitmake_install "$program" "$comment" "$n" "$total" ;;
     "B") echo "$program should already be installed" ;;
-    *) install "$program" "$comment" ;;
+    *) install "$program" "$comment" "$n" "$total" ;;
     esac
   done <$tmpfile
 }
