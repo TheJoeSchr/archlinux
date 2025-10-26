@@ -91,11 +91,9 @@ if not command -sq pikaur
             makepkg -si
             cd ~/archlinux/
         else
-            cd ~/archlinux # change PWD for ./common.sh import
             # need build tools first
             sudo env bash ~/archlinux/install-buildtools.sh
             env bash ~/archlinux/install-aur-and-mirror-helpers.sh
-            cd -
         end
         echo $PWD
     end
@@ -120,7 +118,6 @@ end
 
 # FIRST TRY SCRIPT, MAY FAIL BECAUSE GIT SUBMODULES NOT CHECKED OUT
 if ask "Install CLI essentials"
-    cd ~/archlinux # change PWD for ./common.sh import
     pikaur -S --needed --noconfirm rustup
     # prep for rust based pkgs e.g. fish-git, yazi-git
     rustup default stable
@@ -136,8 +133,6 @@ if ask "Install CLI essentials"
 
         end
     end
-    cd ~/archlinux/
-    echo $PWD
 end
 
 # ESSENTIALS SYSTEM
