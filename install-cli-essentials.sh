@@ -5,6 +5,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./common.sh
+source "$SCRIPT_DIR/common.sh"
 
 #######################################
 # Main function
@@ -20,7 +22,7 @@ main() {
 
   local csv_file
   csv_file="${SCRIPT_DIR}/$(basename -s .sh "$0").csv"
-  "${SCRIPT_DIR}/install-csv.sh" "$csv_file"
+  install_csv "$csv_file"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
