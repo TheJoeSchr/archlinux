@@ -1,66 +1,164 @@
-#! env bash
+# Library of common functions for installation scripts.
 
-# check if unique before installing new
-# for not_unique in $(cut -d, -f2 $progsfile | grep $tobeinstalled) ; do echo $not_unique ; done
+readonly REPODIR="$HOME/.local/sources"
 
-name=makepkg
-repodir="$HOME/.local/sources"
-mkdir -p $repodir
-# use to share common functions between scripts
+#######################################
+# Ensures the source repository directory exists.
+# Globals:
+#   REPODIR
+# Arguments:
+#   None
+# Outputs:
+#   Creates REPODIR if it doesn't exist.
+#######################################
+ensure_repodir() {
+  mkdir -p "$REPODIR"
+}
+#######################################
+# Installs a package using pikaur.
+# Globals:
+#   n       (current package number from install_csv)
+#   total   (total number of packages from install_csv)
+# Arguments:
+#   $1: Package name
+#   $2: Comment/description
+# Outputs:
+#   Writes installation progress to stdout.
+#######################################
 install() {
-  printf "Installing the package \`$1\` ($n of $total) $2\n"
-  pikaur -S --noconfirm --needed "$1" #>/dev/null 2>>/dev/null 2>&11
+  printf "Installing the package \`%s\` (%s of %s) %s\n" "$1" "$n" "$total" "$2"
+  pikaur -S --noconfirm --needed "$1"
 }
 
+#######################################
+# Installs a Python package using pip.
+# Globals:
+#   n       (current package number from install_csv)
+#   total   (total number of packages from install_csv)
+# Arguments:
+#   $1: Package name
+#   $2: Comment/description
+# Outputs:
+#   Writes installation progress to stdout.
+#######################################
 pip_install() {
-  printf "Installing the Python package \`$1\` ($n of $total). $2\n"
-  [ -x "$(command -v "pip")" ] || install python-pip #>/dev/null 2>>/dev/null 2>&11
+  printf "Installing the Python package \`%s\` (%s of %s). %s\n" "$1" "$n" "$total" "$2"
+  [ -x "$(command -v "pip")" ] || install python-pip
   yes | pip install "$1"
 }
 
+#######################################
+# Clones a git repository and installs using make.
+# Globals:
+#   n        (current package number from install_csv)
+#   total    (total number of packages from install_csv)
+#   REPODIR
+# Arguments:
+#   $1: GitHub repository (user/repo)
+#   $2: Comment/description
+# Outputs:
+#   Writes installation progress to stdout.
+# Returns:
+#   0 on success, 1 on failure.
+#######################################
 gitmake_install() {
+  local progname
   progname="${1##*/}"
   progname="${progname%.git}"
-  dir="$repodir/$progname"
-  printf "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $2\n"
-  git -C "$repodir" clone --depth 1 --single-branch \
+
+  ensure_repodir
+  local dir
+  dir="$REPODIR/$progname"
+
+  printf "Installing \`%s\` (%s of %s) via \`git\` and \`make\`. %s\n" "$progname" "$n" "$total" "$2"
+  git -C "$REPODIR" clone --depth 1 --single-branch \
     --no-tags -q "https://www.github.com/$1" "$dir"
-  pushd "$dir" || exit 1
-  make              #>/dev/null 2>>/dev/null 2>&11
-  sudo make install #>/dev/null 2>>/dev/null 2>&11
-  popd
+
+  if ! pushd "$dir" >/dev/null; then
+    echo "ERROR: Failed to change directory to $dir" >&2
+    return 1
+  fi
+
+  make
+  sudo make install
+  popd >/dev/null
 }
 
+#######################################
+# Clones an AUR git repository and installs using makepkg.
+# Globals:
+#   n        (current package number from install_csv)
+#   total    (total number of packages from install_csv)
+#   REPODIR
+# Arguments:
+#   $1: AUR package name
+#   $2: Comment/description
+# Outputs:
+#   Writes installation progress to stdout.
+# Returns:
+#   0 on success, 1 on failure.
+#######################################
 aurgitmake_install() {
+  local progname
   progname="${1##*/}"
-  dir="$repodir/$progname"
-  printf "Installing \`$progname\` ($n of $total) via \`git\` and \`make\` $2 \n"
-  echo "git clone into $dir"
-  git -C "$repodir" clone --depth 1 --single-branch \
+  ensure_repodir
+  local dir
+  dir="$REPODIR/$progname"
+
+  printf "Installing \`%s\` (%s of %s) from AUR. %s\n" "$progname" "$n" "$total" "$2"
+  echo "Cloning into $dir"
+  git -C "$REPODIR" clone --depth 1 --single-branch \
     --no-tags -q "https://aur.archlinux.org/$1.git" "$dir"
-  pushd "$dir" || exit 1
-  makepkg --force --install --syncdeps --noconfirm --clean #>/dev/null 2>>/dev/null 2>&11
-  popd
+
+  if ! pushd "$dir" >/dev/null; then
+    echo "ERROR: Failed to change directory to $dir" >&2
+    return 1
+  fi
+
+  makepkg --force --install --syncdeps --noconfirm --clean
+  popd >/dev/null
 }
 
+#######################################
+# Reads a CSV file and installs programs listed in it.
+# Globals:
+#   None
+# Arguments:
+#   $1: Path to the CSV file.
+# Outputs:
+#   Writes installation progress to stdout.
+# Returns:
+#   1 if the CSV file is not found, 0 otherwise.
+#######################################
 install_csv() {
-  progsfile=$1
-  tmpfile="/tmp/$(basename $progsfile).tmp"
+  local progsfile=$1
+  if [[ ! -f "$progsfile" ]]; then
+    echo "ERROR: File not found: $progsfile" >&2
+    return 1
+  fi
 
-  ls -al
-  [ -f "$progsfile" ] && cat "$progsfile" | sed '/^#/d' >$tmpfile
-  # || curl -Ls "$progsfile" | sed '/^#/d' >$tmpfile
+  local tmpfile
+  tmpfile="/tmp/$(basename "$progsfile").tmp"
 
-  total=$(wc -l <$tmpfile)
-  echo "Install #$total"
+  sed '/^#/d' "$progsfile" >"$tmpfile"
+  # || curl -Ls "$progsfile" | sed '/^#/d' >"$tmpfile"
+
+  local total
+  total=$(wc -l <"$tmpfile")
+  echo "Installing $total programs."
+
+  local n=0
+  local tag program comment
   while IFS=, read -r tag program comment; do
     n=$((n + 1))
 
     # print timestamp for watch-etc.sh
     echo -en "$(date '+%Y%m%d%H%M%S')\t"
 
-    echo "$comment" | grep -q "^\".*\"$" &&
-      comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
+    if [[ "$comment" =~ ^\".*\"$ ]]; then
+      comment="${comment%\"}"
+      comment="${comment#\"}"
+    fi
     case "$tag" in
     "G") gitmake_install "$program" "$comment" ;;
     "P") pip_install "$program" "$comment" ;;
@@ -71,23 +169,46 @@ install_csv() {
   done <$tmpfile
 }
 
+#######################################
+# Reads a CSV file and exports binaries from distrobox.
+# Globals:
+#   None
+# Arguments:
+#   $1: Path to the CSV file.
+# Outputs:
+#   Writes progress to stdout.
+# Returns:
+#   1 if the CSV file is not found, 0 otherwise.
+#######################################
 export_csv() {
-  progsfile=$1
-  tmpfile="/tmp/$(basename $progsfile).tmp"
+  local progsfile=$1
+  if [[ ! -f "$progsfile" ]]; then
+    echo "ERROR: File not found: $progsfile" >&2
+    return 1
+  fi
 
-  ls -al
-  cat $progsfile
-  [ -f "$progsfile" ] && cat "$progsfile" | sed '/^#/d' >$tmpfile
-  # || curl -Ls "$progsfile" | sed '/^#/d' >$tmpfile
+  local tmpfile
+  tmpfile="/tmp/$(basename "$progsfile").tmp"
 
-  total=$(wc -l <$tmpfile)
-  echo "Install #$total in total"
+  sed '/^#/d' "$progsfile" >"$tmpfile"
+  # || curl -Ls "$progsfile" | sed '/^#/d' >"$tmpfile"
+
+  local total
+  total=$(wc -l <"$tmpfile")
+  echo "Exporting $total programs."
+
+  local n=0
+  local tag program comment
   while IFS=, read -r tag program comment; do
     n=$((n + 1))
-    echo "$comment" | grep -q "^\".*\"$" &&
-      comment="$(echo "$comment" | sed -E "s/(^\"|\"$)//g")"
+
+    if [[ "$comment" =~ ^\".*\"$ ]]; then
+      comment="${comment%\"}"
+      comment="${comment#\"}"
+    fi
+
     case "$tag" in
-    "B") distrobox-export --bin $(which $program) --export-path ~/.local/bin ;;
+    "B") distrobox-export --bin "$(which "$program")" --export-path "$HOME/.local/bin" ;;
     esac
-  done <$tmpfile
+  done <"$tmpfile"
 }
