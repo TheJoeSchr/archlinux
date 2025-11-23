@@ -30,6 +30,10 @@ ensure_repodir() {
 #   Sets environment variables.
 #######################################
 setup_build_environment() {
+  if [[ -n "${BUILD_ENV_SETUP:-}" ]]; then
+    return 0
+  fi
+  export BUILD_ENV_SETUP=1
   export CFLAGS="-O2 -march=native -flto"
   export CXXFLAGS="-O2 -march=native -flto"
   export RUSTFLAGS="-C opt-level=2 -C target-cpu=native -C lto=fat"
@@ -62,6 +66,7 @@ setup_build_environment() {
 #   Writes installation progress to stdout.
 #######################################
 install() {
+  setup_build_environment
   if [[ -n "$3" && -n "$4" ]]; then
     printf "Installing the package \`%s\` (%s of %s) %s\n" "$1" "$3" "$4" "$2"
   else
@@ -83,6 +88,7 @@ install() {
 #   Writes installation progress to stdout.
 #######################################
 pip_install() {
+  setup_build_environment
   if [[ -n "$3" && -n "$4" ]]; then
     printf "Installing the Python package \`%s\` (%s of %s). %s\n" "$1" "$3" "$4" "$2"
   else
@@ -107,6 +113,7 @@ pip_install() {
 #   0 on success, 1 on failure.
 #######################################
 gitmake_install() {
+  setup_build_environment
   local progname
   progname="${1##*/}"
   progname="${progname%.git}"
@@ -148,6 +155,7 @@ gitmake_install() {
 #   0 on success, 1 on failure.
 #######################################
 aurgitmake_install() {
+  setup_build_environment
   local progname
   progname="${1##*/}"
   ensure_repodir
