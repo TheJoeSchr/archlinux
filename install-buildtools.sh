@@ -51,6 +51,7 @@ main() {
   echo "NOW RUNNING: $0 AS $USER" >&2
   echo "INSTALLING BUILDTOOLS"
 
+  install_packages ccache
   install_packages base-devel
 
   local csv_file
