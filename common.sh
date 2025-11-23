@@ -14,6 +14,37 @@ readonly REPODIR="$HOME/.local/sources"
 ensure_repodir() {
   mkdir -p "$REPODIR"
 }
+
+#######################################
+# Sets up environment variables for optimized builds.
+# Globals:
+#   CFLAGS
+#   CXXFLAGS
+#   MAKEFLAGS
+#   USE_CCACHE
+#   CCACHE_DIR
+# Arguments:
+#   None
+# Outputs:
+#   Writes configuration info to stdout.
+#   Sets environment variables.
+#######################################
+setup_build_environment() {
+  export CFLAGS="-O2 -march=native -flto"
+  export CXXFLAGS="-O2 -march=native -flto"
+  export MAKEFLAGS="-j$(nproc)"
+  export USE_CCACHE=1
+  export CCACHE_DIR="$HOME/.ccache"
+
+  # Ensure ccache is installed and configured
+  if ! command -v ccache &>/dev/null; then
+    install ccache "dependency for optimized builds"
+  fi
+  ccache -M 10G # allocate 10GB cache
+
+  echo "✅ Environment configured for optimized builds."
+  echo "Using $MAKEFLAGS threads and CPU-specific optimizations: $CFLAGS $CXXFLAGS"
+}
 #######################################
 # Installs a package using pikaur.
 # Globals:
