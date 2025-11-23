@@ -32,6 +32,7 @@ ensure_repodir() {
 setup_build_environment() {
   export CFLAGS="-O2 -march=native -flto"
   export CXXFLAGS="-O2 -march=native -flto"
+  export RUSTFLAGS="-C opt-level=2 -C target-cpu=native -C lto=fat"
   export MAKEFLAGS="-j$(nproc)"
   export USE_CCACHE=1
   export CCACHE_DIR="$HOME/.ccache"
@@ -43,7 +44,10 @@ setup_build_environment() {
   ccache -M 10G # allocate 10GB cache
 
   echo "✅ Environment configured for optimized builds."
-  echo "Using $MAKEFLAGS threads and CPU-specific optimizations: $CFLAGS $CXXFLAGS"
+  echo "Using $MAKEFLAGS threads and CPU-specific optimizations:"
+  echo "  CFLAGS:    $CFLAGS"
+  echo "  CXXFLAGS:  $CXXFLAGS"
+  echo "  RUSTFLAGS: $RUSTFLAGS"
 }
 #######################################
 # Installs a package using pikaur.
