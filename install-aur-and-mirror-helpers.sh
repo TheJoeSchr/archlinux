@@ -21,6 +21,7 @@ source "$SCRIPT_DIR/common.sh"
 #   0 on success, 1 on failure.
 #######################################
 install_aur_helper() {
+  setup_build_environment
   if command -v pikaur &>/dev/null; then
     echo "pikaur is already installed."
     return 0

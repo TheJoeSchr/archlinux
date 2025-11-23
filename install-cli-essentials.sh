@@ -20,6 +20,8 @@ source "$SCRIPT_DIR/common.sh"
 main() {
   echo "NOW RUNNING: $0 AS $USER" >&2
 
+  setup_build_environment
+
   local csv_file
   csv_file="${SCRIPT_DIR}/$(basename -s .sh "$0").csv"
   install_csv "$csv_file"
