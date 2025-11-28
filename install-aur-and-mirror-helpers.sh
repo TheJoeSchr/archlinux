@@ -4,6 +4,18 @@
 
 set -euo pipefail
 
+
+# Get hostname
+HOSTNAME="$(uname --nodename)"
+
+# Default value
+is_steam=false
+
+# Check if hostname starts with "steamdeck"
+if [[ "$HOSTNAME" == steamdeck* ]]; then
+    is_steam=true
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./common.sh
 source "$SCRIPT_DIR/common.sh"
@@ -90,13 +102,19 @@ install_aur_helper() {
 #   Writes progress to stdout.
 #######################################
 rank_mirrors() {
-  if ! command -v rankmirrors &>/dev/null; then
+  if ! command -v reflector &>/dev/null; then
     echo "rankmirrors not found. Installing pacman-contrib..."
-    sudo pacman -S --needed --noconfirm pacman-contrib
+    sudo pacman -S --needed --noconfirm pacman-contrib pacman-mirrorlist
+    sudo pacman -S reflector --overwrite /usr/lib/python3.13
   fi
-  echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
-  sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-  sudo rankmirrors --fasttrack 15
+  # "Running on Steam Deck!"
+  if [[ "$is_steam" == true ]]; then
+    echo "Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/\$repo/os/\$arch" | sudo tee  /etc/pacman.d/mirrorlist
+  else
+      echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
+      sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+      sudo reflector --country Austria --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
+  fi
 }
 
 #######################################
