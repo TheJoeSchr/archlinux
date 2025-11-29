@@ -2,7 +2,7 @@
 #
 # Installs extra command line programs.
 
-set -euo pipefail
+set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./common.sh

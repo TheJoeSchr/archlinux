@@ -2,7 +2,7 @@
 #
 # Installs essential programs for Steam Deck.
 
-set -euo pipefail
+set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./common.sh

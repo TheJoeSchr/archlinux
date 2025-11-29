@@ -3,7 +3,7 @@
 # Installs base-devel and other essential build tools.
 # This script is meant to be run as root.
 
-set -euo pipefail
+set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

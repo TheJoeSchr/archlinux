@@ -2,7 +2,7 @@
 #
 # Installs an AUR helper (pikaur) and optimizes pacman mirrorlist.
 
-set -euo pipefail
+set -uo pipefail
 
 
 # Get hostname
