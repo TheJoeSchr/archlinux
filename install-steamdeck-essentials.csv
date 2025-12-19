@@ -13,9 +13,9 @@ G,jceb/vmux, "like nvr, but per session"
 ,nodejs
 ,npm
 ,python-neovim
-,yazi-git
+,yazi-nightly-bin, "doesnt compile on steamdeck"
 ,nvimpager
-,neovim-nightly, "because of old nvim"
+,neovim-nightly-bin, "needa extra install because of old nvim replace"
 ,google-chrome-stable
 ,ttf-sourcecodepro-nerd
 ,yad, "steamtinker tools"
@@ -25,5 +25,5 @@ G,jceb/vmux, "like nvr, but per session"
 ,zerotier-one, "home vpn"
 ,insync
 ,syncthing
-,ghostty-git
+,ghostty
 ,bottom
