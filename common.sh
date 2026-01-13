@@ -44,6 +44,7 @@ setup_build_environment() {
   # Ensure ccache is installed and configured
   if ! command -v ccache &>/dev/null; then
     install ccache "dependency for optimized builds"
+    mkdir $CCACHE_DIR
   fi
   ccache -M 10G # allocate 10GB cache
 
@@ -67,11 +68,7 @@ setup_build_environment() {
 #######################################
 install() {
   setup_build_environment
-  if [[ -n "$3" && -n "$4" ]]; then
-    printf "Installing the package \`%s\` (%s of %s) %s\n" "$1" "$3" "$4" "$2"
-  else
-    printf "Installing the package \`%s\` %s\n" "$1" "$2"
-  fi
+  printf "Installing the package \`%s\` %s\n" "$1" "$2"
   pikaur -S --noconfirm --needed "$1"
 }
 

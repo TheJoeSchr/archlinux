@@ -87,6 +87,7 @@ upgrade_system() {
   # Manually sync the package database and
   # upgrade the archlinux-keyring package before system upgrade
   pacman -Sy --noconfirm archlinux-keyring
+  pacman -Sy --noconfirm git tmux base-devel
   pacman -Syu --noconfirm
 }
 
