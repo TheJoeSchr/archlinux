@@ -2,8 +2,8 @@
 #
 # Installs an AUR helper (pikaur) and optimizes pacman mirrorlist.
 
-set -uo pipefail
-
+set -o pipefail
+set +e
 
 # Get hostname
 HOSTNAME="$(uname --nodename)"
@@ -13,7 +13,7 @@ is_steam=false
 
 # Check if hostname starts with "steamdeck"
 if [[ "$HOSTNAME" == steamdeck* ]]; then
-    is_steam=true
+  is_steam=true
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -109,11 +109,11 @@ rank_mirrors() {
   fi
   # "Running on Steam Deck!"
   if [[ "$is_steam" == true ]]; then
-    echo "Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/\$repo/os/\$arch" | sudo tee  /etc/pacman.d/mirrorlist
+    echo "Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/\$repo/os/\$arch" | sudo tee /etc/pacman.d/mirrorlist
   else
-      echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
-      sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-      sudo reflector --country Austria --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
+    echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
+    sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    sudo reflector --country Austria --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
   fi
 }
 

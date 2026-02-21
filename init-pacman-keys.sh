@@ -3,8 +3,8 @@
 # Initializes pacman keys, configures pacman/makepkg, and upgrades the system.
 # This script is meant to be run as root.
 
-set -euo pipefail
-
+set -o pipefail
+set +e
 #######################################
 # Ensures the script is run as root.
 # Globals:
