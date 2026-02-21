@@ -1,4 +1,5 @@
 # Library of common functions for installation scripts.
+set +e
 
 readonly REPODIR="$HOME/.local/sources"
 

@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 ENVFILE="$(basename -s .sh $0).env"
 
+set +e
+
 # for rootless podman use so $mount works
 # buildah unshare "./buildah-base.sh" "docker.io/archlinux/archlinux:base-devel"
 sudo ./buildah-base.sh "docker.io/archlinux/archlinux:base-devel"

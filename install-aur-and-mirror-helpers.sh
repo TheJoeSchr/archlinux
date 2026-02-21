@@ -109,7 +109,14 @@ rank_mirrors() {
   fi
   # "Running on Steam Deck!"
   if [[ "$is_steam" == true ]]; then
-    echo "Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/\$repo/os/\$arch" | sudo tee /etc/pacman.d/mirrorlist
+
+    is_steam_host=false
+    if [[ "$is_steam_host" != true ]]; then
+      echo "Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/\$repo/os/\$arch" | sudo tee /etc/pacman.d/mirrorlist
+    else
+      echo "Server = https://mirror.clientvps.com/archlinux/$repo/os/$arch" | sudo tee /etc/pacman.d/mirrorlist
+    fi
+    end
   else
     echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
     sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak

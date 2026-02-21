@@ -2,6 +2,7 @@
 ## RUN AS ROOT ##
 # FIRST ARGUMENT IS YOUR USER
 # e.g. ./script.sh joe
+set -e
 
 echo "$0  [with User: $USER]"
 source ./buildah-common.sh
@@ -12,7 +13,8 @@ export CLI=$(buildah --cgroup-manager=cgroupfs from $IMAGE)
 # CONFIG WORKINGDIR /TMP
 buildah config --workingdir /tmp $CLI
 # COPY SCRIPTS /TMP
-buildah copy $CLI ./* .
+buildah copy $CLI ./*.sh .
+buildah copy $CLI ./*.csv .
 
 # >USER
 entry_pkguser $CLI
@@ -26,7 +28,7 @@ buildah run $CTR /bin/sh -c "pacman -R --noconfirm go"
 exit_pkguser $CLI
 cleanup $CLI
 
-# 
+#
 # FINALIZE
 #
 export CLIMOUNT=$(buildah mount $CLI)
@@ -34,7 +36,6 @@ echo
 echo "MOUNT: $CLIMOUNT"
 echo "CONTAINER: $CLI"
 echo
-
 
 # echo "Cleanup"
 # buildah run $CLI /bin/sh -c "pacman -Sc --noconfirm"
