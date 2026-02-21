@@ -1,0 +1,26 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+,insync
+,syncthing
+,ghostty
+,filelight
+,kdeconnect
+,google-chrome
+,ghostty-git, "most upto-date "
+# vscode
+,visual-studio-code-bin, "vscode"
+,gnome-keyring, "vscode: needed for sync auth"
+,libsecret, "vscode: needed for sync auth"
+,libgnome-keyring, "vscode: needed for sync auth"
+,ltunify, "unify for logitech setpoint"
+# FONTS
+,powerline-fonts,
+,ttf-inconsolata
+,ttf-joypixels
+,ttf-hack-nerd, "used by ghostty: font-family = \"Hack Nerd Font Mono\""
+# MAYBE NOT SO ESSENTIAL...
+#,zathura, "minimalist pdf viewer"
+,sioyek-git, "minimalist nvim shortcuts pdf => on steamdeck flatpak"
+,signal-desktop
+,cpupower-gui
+,appmenu-gtk-module, "for cpupower-gui"
+,1password, "1password desktop app"

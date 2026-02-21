@@ -1,20 +1,8 @@
-,tmux
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+# fixes some failed installs on steamdeck, but not all, so some manual installs are still needed
 ,ncurses, "for urlview"
 ,urlview, "for tmux-urlview"
-,xsel
-,direnv
-,fzf
-,ripgrep
-,exa
-,zoxide
-,git-delta
-,difftastic
-G,jceb/vmux, "like nvr, but per session"
-,nodejs
-,npm
-,python-neovim
-,yazi-nightly-bin, "doesnt compile on steamdeck"
-,nvimpager
+,yazi-nightly-bin, "doesn't compile on steamdeck"
 ,neovim-nightly-bin, "needa extra install because of old nvim replace"
 ,google-chrome-stable
 ,ttf-sourcecodepro-nerd
@@ -22,8 +10,3 @@ G,jceb/vmux, "like nvr, but per session"
 ,xdotools, "steamtinker tools"
 ,xorg-xwininfo, "steamtinker tools"
 ,xxd, "steamtinker tools"
-,zerotier-one, "home vpn"
-,insync
-,syncthing
-,ghostty
-,bottom

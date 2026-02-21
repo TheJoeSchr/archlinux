@@ -18,14 +18,15 @@
 ,appimagelauncher-git
 ,noto-fonts 
 ,openssh
-,c++utilities, "syncthingtray dependency"
-,qtutilities, "syncthingtray dependency"
-,qtforkawesome, "syncthingtray dependency"
-,syncthingtray
+#,c++utilities, "syncthingtray dependency"
+#,qtutilities, "syncthingtray dependency"
+#,qtforkawesome, "syncthingtray dependency"
+#,syncthingtray, "just use syncthing in terminal, syncthingtray is a gui for syncthing that doesn't work in distrobox because of SDL"
 ,clojure
 ,rlwrap, "clj"
 ,fzy, "fuzzy search"
 ,figlet, "ascii art"
 ,toilet, "ascii art"
 A,matterhorn, "mattermost tui client"
-,syncthing, "not essential, breaks distrpbox because of SDL"
+,syncthing, "not essential, breaks distrobox because of SDL"
+,cpupower, "check if cpu is offline: lscpu | grep -E 'CPU\(s\)|On-line|Off-line'"
