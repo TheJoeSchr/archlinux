@@ -56,7 +56,7 @@ setup_build_environment() {
   echo "  RUSTFLAGS: $RUSTFLAGS"
 }
 #######################################
-# Installs a package using pikaur.
+# Installs a package using pikaur/yay.
 # Globals:
 #   None
 # Arguments:
@@ -70,7 +70,7 @@ setup_build_environment() {
 install() {
   setup_build_environment
   printf "Installing the package \`%s\` %s\n" "$1" "$2"
-  pikaur -S --noconfirm --needed "$1"
+  yay -S --noconfirm --needed "$1"
 }
 
 #######################################
