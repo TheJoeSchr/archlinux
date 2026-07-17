@@ -31,7 +31,7 @@ entry_pkguser "$BASE"
 
 echo "INSTALL AUR HELPERS"
 buildah run "$BASE" /bin/bash "./install-aur-and-mirror-helpers.sh"
-buildah run "$BASE" which "pikaur"
+buildah run "$BASE" which "yay"
 
 # /USER
 exit_pkguser "$BASE"
