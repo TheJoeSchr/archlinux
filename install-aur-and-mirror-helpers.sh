@@ -44,7 +44,7 @@ install_aur_helper() {
   # 1. Try with yay
   if ! command -v yay &>/dev/null; then
     echo "yay not found, attempting to install it from AUR..."
-    aurgitmake_install yay-bin "AUR helper"
+    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
   fi
 
   if command -v yay &>/dev/null; then
