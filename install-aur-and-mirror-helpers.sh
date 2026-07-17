@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Installs an AUR helper (pikaur) and optimizes pacman mirrorlist.
+# Installs an AUR helper (yay) and optimizes pacman mirrorlist.
 
 set -o pipefail
 set +e
@@ -21,8 +21,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
 #######################################
-# Installs an AUR helper, preferring pikaur. It tries different methods
-# and helpers (yay, paru) as fallbacks.
+# Installs an AUR helper (yay).
 # Globals:
 #   None
 # Arguments:
@@ -34,61 +33,21 @@ source "$SCRIPT_DIR/common.sh"
 #######################################
 install_aur_helper() {
   setup_build_environment
-  if command -v pikaur &>/dev/null; then
-    echo "pikaur is already installed."
+  if command -v yay &>/dev/null; then
+    echo "yay is already installed."
     return 0
   fi
 
-  echo "pikaur not found. Attempting to install it..."
+  echo "yay not found. Attempting to install it..."
 
-  # 1. Try with yay
-  if ! command -v yay &>/dev/null; then
-    echo "yay not found, attempting to install it from AUR..."
-    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-  fi
+  sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
   if command -v yay &>/dev/null; then
-    echo "Using yay to install pikaur-static..."
-    yay --needed --noconfirm -S pikaur-static
-    if command -v pikaur &>/dev/null; then
-      echo "pikaur installed successfully using yay."
-      return 0
-    fi
-    echo "Failed to install pikaur with yay."
-  fi
-
-  # 2. Try with paru
-  if ! command -v paru &>/dev/null; then
-    echo "paru not found, attempting to install it with pacman..."
-    sudo pacman -S --needed --noconfirm paru
-  fi
-
-  if command -v paru &>/dev/null; then
-    echo "Using paru to install pikaur-static..."
-    paru -S --needed --noconfirm pikaur-static
-    if command -v pikaur &>/dev/null; then
-      echo "pikaur installed successfully using paru."
-      return 0
-    fi
-    echo "Failed to install pikaur with paru."
-  fi
-
-  # 3. Direct installation from AUR
-  echo "Trying to install pikaur directly from AUR..."
-  aurgitmake_install pikaur "AUR helper"
-  if command -v pikaur &>/dev/null; then
-    echo "pikaur installed successfully from AUR."
+    echo "yay installed successfully."
     return 0
   fi
 
-  echo "Trying to install pikaur-static directly from AUR..."
-  aurgitmake_install pikaur-static "AUR helper"
-  if command -v pikaur &>/dev/null; then
-    echo "pikaur-static installed successfully from AUR."
-    return 0
-  fi
-
-  echo "ERROR: Could not install pikaur." >&2
+  echo "ERROR: Could not install yay." >&2
   return 1
 }
 
