@@ -24,3 +24,4 @@
 ,cpupower-gui
 ,appmenu-gtk-module, "for cpupower-gui"
 ,1password, "1password desktop app"
+,knsip, "image annotation tool, similar to spectacle"
