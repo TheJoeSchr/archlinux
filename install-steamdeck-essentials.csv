@@ -4,6 +4,7 @@
 ,urlview, "for tmux-urlview"
 ,yazi-nightly-bin, "doesn't compile on steamdeck"
 ,neovim-nightly-bin, "needa extra install because of old nvim replace"
+,ghostty, "-git not possible"
 ,google-chrome-stable
 ,ttf-sourcecodepro-nerd
 ,yad, "steamtinker tools"

@@ -5,7 +5,7 @@
 ,filelight
 ,kdeconnect
 ,google-chrome
-,ghostty-git, "most upto-date "
+,ghostty
 # vscode
 ,visual-studio-code-bin, "vscode"
 ,gnome-keyring, "vscode: needed for sync auth"
