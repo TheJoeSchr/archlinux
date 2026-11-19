@@ -75,7 +75,6 @@ rank_mirrors() {
     else
       echo "Server = https://mirror.clientvps.com/archlinux/$repo/os/$arch" | sudo tee /etc/pacman.d/mirrorlist
     fi
-    end
   else
     echo "Ranking mirrors to find the fastest 15 and updating mirrorlist..."
     sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
